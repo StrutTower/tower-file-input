@@ -6,6 +6,7 @@ Click here to learn more. https://go.microsoft.com/fwlink/?LinkId=518007
 var gulp = require('gulp'),
     sass = require('gulp-sass'),
     cleanCss = require('gulp-clean-css'),
+    terser = require('gulp-terser'),
     rename = require('gulp-rename');
 
 var options = {
@@ -17,7 +18,7 @@ var options = {
         src: 'src/tower-file-input.scss',
         dest: 'dist'
     }
-}
+};
 
 gulp.task('process-sass', function () {
     return gulp.src(options.css.src)
@@ -28,8 +29,16 @@ gulp.task('process-sass', function () {
         .pipe(gulp.dest(options.css.dest));
 });
 
+gulp.task('process-js', function () {
+    return gulp.src(options.js.src)
+        .pipe(gulp.dest(options.js.dest))
+        .pipe(terser())
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(gulp.dest(options.js.dest));
+});
+
 gulp.task('sass-watch', function () {
     return gulp.watch(options.css.src, gulp.parallel('process-sass'));
 });
 
-gulp.task('default', gulp.parallel('process-sass'));
+gulp.task('default', gulp.parallel('process-sass', 'process-js'));
