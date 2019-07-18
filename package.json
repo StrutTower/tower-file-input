@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "name": "tower-file-input",
-  "private": true,
+  "private": false,
   "dependencies": {
     "jquery": "~3.4.1"
   },
