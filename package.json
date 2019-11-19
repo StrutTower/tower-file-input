@@ -3,7 +3,7 @@
   "name": "tower-file-input",
   "private": false,
   "dependencies": {
-    "jquery": "~3.4.1"
+    "jquery": "~3.4.0"
   },
   "devDependencies": {
     "bootstrap": "~4.3.1",
