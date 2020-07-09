@@ -6,7 +6,8 @@
             fileList: true,
             iconClass: null,
             imgPreview: true,
-            imgPreviewClass: null
+            imgPreviewClass: null,
+            imgPreviewSelector: null
         }, options);
 
         function inputValueChanged(e) {
@@ -35,7 +36,7 @@
                 var file = files[0];
                 label.html(iconHtml + file.name);
 
-                if (file.type.match('image.*') && settings.imgPreview) {
+                if (file.type.match('image.*') && settings.imgPreview && (settings.imgPreviewSelector === null || settings.imgPreviewSelector.length < 1)) {
                     if (!img.length) {
                         details.append('<div class="tower-input-preview-container"><img class="' + settings.imgPreviewClass + '" /></div>');
                         img = container.find('img');
@@ -43,6 +44,14 @@
 
                     details.show();
                     showImgPreview(file, img);
+                } else if (file.type.match('image.*') && settings.imgPreview && settings.imgPreviewSelector !== null && settings.imgPreviewSelector.length > 0) {
+                    img = $(settings.imgPreviewSelector);
+                    if (img.length > 0 && img.is('img')) {
+                        details.hide();
+                        showImgPreview(file, img);
+                    } else {
+                        throw 'The selected element must be a img';
+                    }
                 } else {
                     details.hide();
                     img.attr('src', '').hide();
@@ -101,6 +110,10 @@
 
             var details = container.find('.tower-file-details');
             details.hide();
+
+            if (settings.imgPreviewSelector !== null && settings.imgPreviewSelector.length > 0) {
+                $(settings.imgPreviewSelector).attr('src', '');
+            }
         }
 
         this.filter('input[type="file"]').each(function () {

@@ -110,6 +110,10 @@
 
             var details = container.find('.tower-file-details');
             details.hide();
+
+            if (settings.imgPreviewSelector !== null && settings.imgPreviewSelector.length > 0) {
+                $(settings.imgPreviewSelector).attr('src', '');
+            }
         }
 
         this.filter('input[type="file"]').each(function () {
