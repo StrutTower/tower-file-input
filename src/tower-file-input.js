@@ -38,7 +38,7 @@
 
                 if (file.type.match('image.*') && settings.imgPreview && (settings.imgPreviewSelector === null || settings.imgPreviewSelector.length < 1)) {
                     if (!img.length) {
-                        details.append('<div class="tower-input-preview-container"><img class="' + settings.imgPreviewClass + '" /></div>');
+                        details.append('<div class="tower-input-preview-container"><div class="tower-input-preview-wrapper"><img class="' + settings.imgPreviewClass + '" /></div></div>');
                         img = container.find('img');
                     }
 
