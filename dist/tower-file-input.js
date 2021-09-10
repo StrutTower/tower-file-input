@@ -6,7 +6,7 @@
             fileList: true,
             iconClass: null,
             imgPreview: true,
-            imgPreviewClass: null,
+            imgPreviewClass: '',
             imgPreviewSelector: null
         }, options);
 
@@ -17,6 +17,7 @@
             var label = container.find('label');
             var clear = container.find('.tower-file-clear');
             var fileList = container.find('.tower-file-list').empty().hide();
+            var imgContainer = container.find('.tower-input-preview-container');
             var img = container.find('img');
             var details = container.find('.tower-file-details');
             if (!details.length) {
@@ -38,16 +39,21 @@
 
                 if (file.type.match('image.*') && settings.imgPreview && (settings.imgPreviewSelector === null || settings.imgPreviewSelector.length < 1)) {
                     if (!img.length) {
-                        details.append('<div class="tower-input-preview-container"><div class="tower-input-preview-wrapper"><img class="' + settings.imgPreviewClass + '" /></div></div>');
+                        details.append('<div class="tower-input-preview-container"><div class="tower-input-preview-wrapper"><img alt="" /></div></div>');
                         img = container.find('img');
+                        if (settings.imgPreviewClass !== undefined && settings.imgPreviewClass.length > 0) {
+                            img.addClass(settings.imgPreviewClass)
+                        }
                     }
 
                     details.show();
+                    imgContainer.show();
                     showImgPreview(file, img);
                 } else if (file.type.match('image.*') && settings.imgPreview && settings.imgPreviewSelector !== null && settings.imgPreviewSelector.length > 0) {
                     img = $(settings.imgPreviewSelector);
                     if (img.length > 0 && img.is('img')) {
                         details.hide();
+                        imgContainer.show();
                         showImgPreview(file, img);
                     } else {
                         throw 'The selected element must be a img';
@@ -73,8 +79,10 @@
                     }
                     details.show();
                     fileList.show();
+                    imgContainer.hide();
                 } else {
                     fileList.hide();
+                    imgContainer.hide();
                 }
                 label.html(iconHtml + files.length + ' Files Selected');
                 clear.attr('disabled', null);
@@ -90,9 +98,17 @@
 
         // Read the file data and insert the data URL into the src
         function showImgPreview(file, img) {
+
             var reader = new FileReader();
 
             reader.onload = function (e) {
+                img[0].onload = function () {
+                    if (this.height > this.width) {
+                        img.addClass('tower-input-preview-portrait');
+                    } else {
+                        img.removeClass('tower-input-preview-portrait');
+                    }
+                };
                 img.attr('src', reader.result).show();
             };
             reader.readAsDataURL(file);

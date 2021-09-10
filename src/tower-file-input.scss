@@ -6,7 +6,7 @@
     }
 
     label {
-        margin-bottom:0;
+        margin-bottom: 0;
     }
 
     label, .tower-file-clear:not(:disabled) {
@@ -18,7 +18,7 @@
         border: 1px solid #ccc;
         padding: .2rem .5rem;
         font-size: 1rem;
-        font-weight:normal;
+        font-weight: normal;
         line-height: 1.5;
         user-select: none;
         transition: background-color .15s ease-in-out, border-color .15s ease-in-out;
@@ -33,9 +33,9 @@
     .tower-file-details {
         position: relative;
         border-radius: .25rem;
-        margin-top:0.5rem;
+        margin-top: 0.5rem;
 
-        .tower-file-list, img {
+        .tower-file-list, .tower-input-preview-container {
             border: 1px solid #ddd;
             display: inline-block;
         }
@@ -44,11 +44,15 @@
             padding: .375rem .75rem .375rem 2.5rem;
         }
 
-        img {
+        .tower-input-preview-container {
             padding: .375rem;
-            max-width:100%;
         }
 
+        img {
+            max-width: 100%;
+        }
+
+        // Arrow
         &:before, &:after {
             content: '';
             position: absolute;
