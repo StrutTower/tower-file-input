@@ -1,4 +1,4 @@
-﻿.tower-file {
+﻿.twr-file {
     input[type="file"] {
         height: 0.1px;
         width: 0.1px;
@@ -9,11 +9,11 @@
         margin-bottom: 0;
     }
 
-    label, .tower-file-clear:not(:disabled) {
+    label, .twr-file-clear:not(:disabled) {
         cursor: pointer;
     }
 
-    .tower-file-button {
+    .twr-file-button {
         background: white;
         border: 1px solid #ccc;
         padding: .2rem .5rem;
@@ -30,28 +30,28 @@
         }
     }
 
-    .tower-file-details {
+    .twr-file-details {
         position: relative;
         border-radius: .25rem;
         margin-top: 0.5rem;
 
-        .tower-file-list, .tower-input-preview-container {
+        .twr-file-list, .twr-img-preview-container {
+            background: white;
             border: 1px solid #ddd;
             display: inline-block;
         }
 
-        .tower-file-list {
+        .twr-file-list {
             padding: .375rem .75rem .375rem 2.5rem;
         }
 
-        .tower-input-preview-container {
+        .twr-img-preview-container {
             padding: .375rem;
         }
 
         img {
             max-width: 100%;
         }
-
         // Arrow
         &:before, &:after {
             content: '';
@@ -71,6 +71,46 @@
             top: calc(-0.6rem + 1px);
             border: 5px solid transparent;
             border-bottom-color: white;
+        }
+    }
+
+    .hidden {
+        display: none !important;
+    }
+}
+
+[data-bs-theme="dark"] {
+    .twr-file {
+        .twr-file-button {
+            background: #333;
+            color: #ddd;
+            border: 1px solid #777;
+
+            &:hover:not(:disabled) {
+                background: lighten(#333, 5);
+                border-color: lighten(#777, 8);
+            }
+
+            &:disabled {
+                color: #bbb;
+                background: #444;
+            }
+        }
+    }
+
+    .twr-file-details {
+
+        .twr-file-list, .twr-img-preview-container {
+            border: 1px solid #777;
+            background: #333;
+        }
+
+        &:before {
+            border-bottom-color: #777;
+        }
+
+        &:after {
+            border-bottom-color: #333;
         }
     }
 }

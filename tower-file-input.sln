@@ -1,27 +1,27 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2047
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34018.315
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "tower-file-input", ".", "{C8E1A4B6-88B8-41AB-AE18-82D8B3BD1967}"
 	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_60271"
-		Debug.AspNetCompiler.PhysicalPath = "..\_GitHub\tower-file-input\"
+		Debug.AspNetCompiler.PhysicalPath = "..\tower-file-input\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_60271\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.VirtualPath = "/localhost_60271"
-		Release.AspNetCompiler.PhysicalPath = "..\_GitHub\tower-file-input\"
+		Release.AspNetCompiler.PhysicalPath = "..\tower-file-input\"
 		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_60271\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "60271"
-		SlnRelativePath = "."
+		SlnRelativePath = "..\tower-file-input\"
 	EndProjectSection
 EndProject
 Global

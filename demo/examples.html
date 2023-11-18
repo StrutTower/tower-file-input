@@ -1,12 +1,16 @@
-﻿<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
+    <title>Tower File Input - Examples</title>
     <meta charset="utf-8" />
-    <title>Tower File Input Examples</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.3.92/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.materialdesignicons.com/3.3.92/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" />
+
     <link href="../dist/tower-file-input.css" rel="stylesheet" />
+    <script src="scripts/themeHandler.js" type="text/javascript"></script>
 
     <style>
         .mdi:before {
@@ -17,349 +21,202 @@
             vertical-align: -15%;
         }
 
-        .highlight {
-            background: yellow;
+        :not(pre)>code[class*="language-"],
+        pre[class*="language-"] {
+            background: #1e1e1e
         }
 
-        pre code {
-            font-size: 0.9rem;
-        }
-
-        #demo-7 .tower-input-preview-wrapper {
-            margin: 0 auto;
-            position: relative;
-            width: 200px;
-            height: 200px;
+        .hidden {
+            /*display:none !important;*/
+            opacity: 0;
+            max-height: 1px;
+            margin: 0;
+            padding: 0;
             overflow: hidden;
         }
-
-            #demo-7 .tower-input-preview-wrapper img {
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                max-height: 100%;
-                max-width: none;
-                transform: translate(-50%, -50%);
-            }
-
-                #demo-7 .tower-input-preview-wrapper img.tower-input-preview-portrait {
-                    max-height: none;
-                    max-width: 100%;
-                }
     </style>
 </head>
+
 <body>
-    <nav class="navbar navbar-dark bg-dark mb-2">
+    <nav class="navbar navbar-expand-lg navbar-dark static-top mb-2" style="background-color: #1f6063;">
         <div class="container">
-            <span class="navbar-brand">Tower File Input</span>
+            <a href="index.html" class="navbar-brand">Tower File Input</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-collapse-area">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbar-collapse-area">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <button type="button" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <span id="current-theme"></span> <span class="d-md-none">Switch Themes</span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <button type="button" class="dropdown-item" data-bs-theme-value="light"><span class="mdi mdi-weather-sunny"></span> Light</button>
+                            <button type="button" class="dropdown-item" data-bs-theme-value="dark"><span class="mdi mdi-weather-night"></span> Dark</button>
+                            <button type="button" class="dropdown-item" data-bs-theme-value="auto"><span class="mdi mdi-theme-light-dark"></span> Auto</button>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="https://github.com/StrutTower/tower-file-input" rel="noreferrer noopener" class="nav-link">
+                            GitHub
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
     <main class="container">
-        <div id="demo1">
-            <h6>Default Styling Single File</h6>
+        <h3>Examples</h3>
+        <hr />
+
+        <div>
+            <h5>Default Styling Single File</h5>
             <p>
-                Basic setup using the class <code>tower-file-button</code>
+                Basic setup using the class <code>twr-file-button</code>
                 on the label for the default styling included in the plugin.
             </p>
-            <div>
-                <div class="tower-file">
-                    <input type="file" id="demoInput1" />
-                    <label for="demoInput1" class="tower-file-button">
-                        Select a File
-                    </label>
-                </div>
+
+            <div class="twr-file">
+                <input type="file" id="demoInput1" />
+                <label for="demoInput1" class="twr-file-button">
+                    Select a File
+                </label>
             </div>
 
-            <div class="text-right">
-                <a href="#" data-toggle="collapse" data-target="#demo-code-1">Show/Hide Code</a>
+            <div class="text-end">
+                <a href="#" class="twr-toggle" data-target="#default-example-code">Show/Hide Code</a>
             </div>
 
-            <div class="collapse" id="demo-code-1">
-                <pre><code>&lt;div class=&quot;tower-file&quot;&gt;
-    &lt;input type=&quot;file&quot; id=&quot;demoInput1&quot; /&gt;
-    &lt;label for=&quot;demoInput1&quot; <span class="highlight">class=&quot;tower-file-button&quot;</span>&gt;
-        Select a File
-    &lt;/label&gt;
-&lt;/div&gt;
-</code>
-<code>$('#demoInput1').fileInput();</code></pre>
+            <div id="default-example-code" class="hidden">
+                <pre><code class="language-html" data-sample-url="../demo-templates/examples/_default.html"></code></pre>
+                <pre><code class="language-javascript" data-sample-url="scripts/examplesDefault.js"></code></pre>
             </div>
 
             <hr />
         </div>
 
-        <div id="demo2">
-            <h6>Default Styling Single File With a Font Icon</h6>
+        <div>
+            <h5>With Clear Button</h5>
+            <p>Add a button with the <code>twr-file-clear</code> class. This will allow deselecting all of the selected files.</p>
+
+            <div class="twr-file">
+                <input type="file" id="demoInput4" multiple />
+                <label for="demoInput4" class="twr-file-button">
+                    <span class="mdi mdi-upload"></span>Select Files
+                </label>
+                <button type="button" class="twr-file-clear twr-file-button">Clear</button>
+            </div>
+
+            <div class="text-end">
+                <a href="#" class="twr-toggle" data-target="#clear-button-example-code">Show/Hide Code</a>
+            </div>
+
+            <div id="clear-button-example-code" class="hidden">
+                <pre><code class="language-html" data-sample-url="../demo-templates/examples/_clearButton.html"></code></pre>
+                <pre><code class="language-javascript" data-sample-url="scripts/examplesClearButton.js"></code></pre>
+            </div>
+
+            <hr />
+        </div>
+
+        <div>
+            <h5>Default Styling Single File With a Font Icon</h5>
             <p>
-                Add a font icon before the text when any files are selected.
+                Adds a font icon before the text when any files are selected.
                 The icon when no files are selected has to be in the HTML of the label
                 when the plugin is initialized.
             </p>
-            <div>
-                <div class="tower-file">
-                    <input type="file" id="demoInput2" />
-                    <label for="demoInput2" class="tower-file-button">
-                        <span class="mdi mdi-upload"></span>Select a File
-                    </label>
-                </div>
+
+            <div class="twr-file">
+                <input type="file" id="demoInput2" />
+                <label for="demoInput2" class="twr-file-button">
+                    <span class="mdi mdi-upload"></span>Select a File
+                </label>
+                <button type="button" class="twr-file-clear twr-file-button">Clear</button>
             </div>
 
-            <div class="text-right">
-                <a href="#" data-toggle="collapse" data-target="#demo-code-2">
-                    Show/Hide Code
-                </a>
+            <div class="text-end">
+                <a href="#" class="twr-toggle" data-target="#font-icon-example-code">Show/Hide Code</a>
             </div>
 
-            <div id="demo-code-2" class="collapse">
-                <pre><code>&lt;div class=&quot;tower-file&quot;&gt;
-    &lt;input type=&quot;file&quot; id=&quot;demoInput2&quot; /&gt;
-    &lt;label for=&quot;demoInput2&quot; class=&quot;tower-file-button&quot;&gt;
-        &lt;<span class="highlight">span class=&quot;mdi mdi-upload&quot;&gt;&lt;/span&gt;</span>Select a File
-    &lt;/label&gt;
-&lt;/div&gt;
-</code>
-<code>$('#demoInput2').fileInput({
-                <span class="highlight">iconClass: 'mdi mdi-fw mdi-upload'</span>
-});</code></pre>
+            <div id="font-icon-example-code" class="hidden">
+                <pre><code class="language-html" data-sample-url="../demo-templates/examples/_fontIcon.html"></code></pre>
+                <pre><code class="language-javascript" data-sample-url="scripts/examplesFontIcon.js"></code></pre>
             </div>
-
             <hr />
         </div>
 
-        <div id="demo3">
-            <h6>Default Styling Multiple Files</h6>
-            <div>
-                <div class="tower-file">
-                    <input type="file" id="demoInput3" multiple />
-                    <label for="demoInput3" class="tower-file-button">
-                        <span class="mdi mdi-upload"></span>Select Files
-                    </label>
-                </div>
-            </div>
+        <div>
+            <h5>Default Styling Multiple Files</h5>
+            <p>Add the <code>multiple</code> attribute to the file input to allow selecting multiple files.</p>
 
-            <div class="text-right">
-                <a href="#" data-toggle="collapse" data-target="#demo-code-3">
-                    Show/Hide Code
-                </a>
-            </div>
-
-            <div id="demo-code-3" class="collapse">
-                <pre><code>&lt;div class=&quot;tower-file&quot;&gt;
-    &lt;input type=&quot;file&quot; id=&quot;demoInput3&quot; <span class="highlight">multiple</span> /&gt;
-    &lt;label for=&quot;demoInput3&quot; class=&quot;tower-file-button&quot;&gt;
-        &lt;span class=&quot;mdi mdi-upload&quot;&gt;&lt;/span&gt;<span class="highlight">Select Files</span>
-    &lt;/label&gt;
-&lt;/div&gt;
-</code>
-<code>$('#demoInput3').fileInput({
-    iconClass: 'mdi mdi-fw mdi-upload'
-});</code></pre>
-            </div>
-
-            <hr />
-        </div>
-
-        <div id="demo4">
-            <h6>With Clear Button</h6>
-            <p></p>
-            <div class="tower-file">
-                <input type="file" id="demoInput4" multiple />
-                <label for="demoInput4" class="tower-file-button">
+            <div class="twr-file">
+                <input type="file" id="demoInput3" multiple />
+                <label for="demoInput3" class="twr-file-button">
                     <span class="mdi mdi-upload"></span>Select Files
                 </label>
-                <button type="button" class="tower-file-clear tower-file-button">Clear</button>
+                <button type="button" class="twr-file-clear twr-file-button">Clear</button>
             </div>
 
-            <div class="text-right">
-                <a href="#" data-toggle="collapse" data-target="#demo-code-4">
-                    Show/Hide Code
-                </a>
+            <div class="text-end">
+                <a href="#" class="twr-toggle" data-target="#multiple-files-example-code">Show/Hide Code</a>
             </div>
 
-            <div class="collapse" id="demo-code-4">
-                <pre><code>&lt;div class=&quot;tower-file&quot;&gt;
-    &lt;input type=&quot;file&quot; id=&quot;demoInput4&quot; /&gt;
-    &lt;label for=&quot;demoInput4&quot; class=&quot;tower-file-button&quot;&gt;
-        &lt;span class=&quot;mdi mdi-upload&quot;&gt;&lt;/span&gt;Select a File
-    &lt;/label&gt;
-    &lt;<span class="highlight">button</span> type=&quot;button&quot; <span class="highlight">class=&quot;tower-file-clear</span> tower-file-button&quot;&gt;
-        Clear
-    &lt;/button&gt;
-&lt;/div&gt;
-</code>
-<code>$('#demoInput4').fileInput({
-    iconClass: 'mdi mdi-fw mdi-upload'
-});</code></pre>
+            <div id="multiple-files-example-code" class="hidden">
+                <pre><code class="language-html" data-sample-url="../demo-templates/examples/_multipleFiles.html"></code></pre>
+                <pre><code class="language-javascript" data-sample-url="scripts/examplesMultipleFiles.js"></code></pre>
             </div>
 
             <hr />
         </div>
 
-        <div id="demo-6">
-            <h6>Image Preview Selector</h6>
+        <div>
+            <h5>Using Bootstrap Styles</h5>
             <p>
-
+                Replace the <code>twr-file-button</code> class with something like Bootstraps button classes
             </p>
-            <div class="tower-file">
-                <input type="file" id="demoInput6" />
-                <label for="demoInput6" class="tower-file-button">
-                    <span class="mdi mdi-upload"></span>Select File
-                </label>
-                <button type="button" class="tower-file-clear tower-file-button">
-                    Clear
-                </button>
-            </div>
 
-            <div style="padding:5px;line-height:0;">
-                <img id="demo6-image-preview" alt="" style="max-height:50vh; max-width:100%;" />
-            </div>
-
-            <div class="text-right">
-                <a href="#" data-toggle="collapse" data-target="#demo-code-6">
-                    Show/Hide Code
-                </a>
-            </div>
-
-            <div class="collapse" id="demo-code-6">
-                <pre><code>&lt;div class=&quot;tower-file&quot;&gt;
-    &lt;input type=&quot;file&quot; id=&quot;demoInput4&quot; /&gt;
-    &lt;label for=&quot;demoInput4&quot; class=&quot;tower-file-button&quot;&gt;
-        &lt;span class=&quot;mdi mdi-upload&quot;&gt;&lt;/span&gt;Select a File
-    &lt;/label&gt;
-    &lt;button type=&quot;button&quot; class=&quot;tower-file-clear tower-file-button&quot;&gt;
-        Clear
-    &lt;/button&gt;
-&lt;/div&gt;
-
-&lt;div&gt;
-    &lt;img <span class="highlight">id="demo6-image-preview"</span> /&gt;
-&lt;/div&gt;
-</code>
-<code>$('#demoInput6').fileInput({
-                <span class="highlight">imgPreviewSelector: '#demo6-image-preview'</span>
-});</code></pre>
-            </div>
-            <hr />
-        </div>
-
-        <div id="demo-7">
-            <h6>Cropping the Preview Image</h6>
-            <p>
-
-            </p>
-            <div class="tower-file">
-                <input type="file" id="demoInput7" />
-                <label for="demoInput7" class="tower-file-button">
-                    <span class="mdi mdi-upload"></span>Select File
-                </label>
-                <button type="button" class="tower-file-clear tower-file-button">
-                    Clear
-                </button>
-            </div>
-
-            <div class="text-right">
-                <a href="#" data-toggle="collapse" data-target="#demo-code-7">
-                    Show/Hide Code
-                </a>
-            </div>
-
-            <div id="demo-code-7" class="collapse">
-                <pre><code>&lt;style&gt;
-    .tower-input-preview-wrapper {
-        margin: 0 auto;
-        position: relative;
-        width: 200px;
-        height: 200px;
-        overflow: hidden;
-    }
-
-    .tower-input-preview-wrapper img {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        max-height: 100%;
-        max-width: none;
-        transform: translate(-50%, -50%);
-    }
-
-        .tower-input-preview-wrapper img.tower-input-preview-portrait {
-        max-height: none;
-        max-width: 100%;
-    }
-&lt;/style&gt;
-</code></pre>
-            </div>
-            <hr />
-        </div>
-
-        <div id="demo-5">
-            <h6>Using Bootstrap 4 Styles</h6>
-            <p>
-                Replace the <code>tower-file-button</code> class with something like Bootstraps button classes
-            </p>
-            <div class="tower-file">
+            <div class="twr-file">
                 <input type="file" id="demoInput5" multiple />
                 <label for="demoInput5" class="btn btn-primary">
                     <span class="mdi mdi-upload"></span>Select Files
                 </label>
-                <button type="button" class="btn btn-secondary tower-file-clear align-top">Clear</button>
+                <button type="button" class="btn btn-secondary twr-file-clear align-top">Clear</button>
             </div>
 
-            <div class="text-right">
-                <a href="#" data-toggle="collapse" data-target="#demo-code-5">
-                    Show/Hide Code
-                </a>
+            <div class="text-end">
+                <a href="#" class="twr-toggle" data-target="#bootstrap-styles-example-code">Show/Hide Code</a>
             </div>
 
-            <div id="demo-code-5" class="collapse">
-                <pre><code>&lt;div class=&quot;tower-file&quot;&gt;
-    &lt;input type=&quot;file&quot; id=&quot;demoInput5&quot; /&gt;
-    &lt;label for=&quot;demoInput5&quot; <span class="highlight">class=&quot;btn btn-primary&quot;</span>&gt;
-        &lt;span class=&quot;mdi mdi-upload&quot;&gt;&lt;/span&gt;Select Files
-    &lt;/label&gt;
-    &lt;button type=&quot;button&quot; <span class="highlight">class=&quot;btn btn-secondary</span> tower-file-clear align-top&quot;&gt;
-        Clear
-    &lt;/button&gt;
-&lt;/div&gt;
-</code>
-<code>$('#demoInput5').fileInput({
-    iconClass: 'mdi mdi-fw mdi-upload'
-});</code></pre>
+            <div id="bootstrap-styles-example-code" class="hidden">
+                <pre><code class="language-html" data-sample-url="../demo-templates/examples/_bootstrapStyles.html"></code></pre>
+                <pre><code class="language-javascript" data-sample-url="scripts/examplesBootstrapStyles.js"></code></pre>
             </div>
         </div>
     </main>
 
-    <script src="https://code.jquery.com/jquery-3.4.0.min.js"
-            integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg="
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <footer class="container">
+        <hr />
+        <p>TowerSoft</p>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js" data-manual></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markup.min.js"></script>
+
+    <script src="scripts/scripts.js"></script>
     <script src="../src/tower-file-input.js"></script>
-    <script>
-        $('#demoInput1').fileInput();
-
-        $('#demoInput2').fileInput({
-            iconClass: 'mdi mdi-fw mdi-upload'
-        });
-
-        $('#demoInput3').fileInput({
-            iconClass: 'mdi mdi-fw mdi-upload'
-        });
-
-        $('#demoInput4').fileInput({
-            iconClass: 'mdi mdi-fw mdi-upload'
-        });
-
-        $('#demoInput5').fileInput({
-            iconClass: 'mdi mdi-fw mdi-upload'
-        });
-
-        $('#demoInput6').fileInput({
-            imgPreviewSelector: '#demo6-image-preview'
-        });
-
-        $('#demoInput7').fileInput();
-    </script>
+    <script src="scripts/examplesDefault.js"></script>
+    <script src="scripts/examplesFontIcon.js"></script>
+    <script src="scripts/examplesMultipleFiles.js"></script>
+    <script src="scripts/examplesClearButton.js"></script>
+    <script src="scripts/examplesBootstrapStyles.js"></script>
 </body>
+
 </html>

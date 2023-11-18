@@ -1,14 +1,11 @@
-/// <binding ProjectOpened='sass-watch' />
-/*
-This file is the main entry point for defining Gulp tasks and using Gulp plugins.
-Click here to learn more. https://go.microsoft.com/fwlink/?LinkId=518007
-*/
-
+/// <binding ProjectOpened='watch-html' />
 var gulp = require('gulp'),
-    sass = require('gulp-sass'),
+    sass = require('gulp-dart-sass'),
     cleanCss = require('gulp-clean-css'),
     terser = require('gulp-terser'),
-    rename = require('gulp-rename');
+    rename = require('gulp-rename'),
+    fileInclude = require('gulp-file-include'),
+    htmlBeautify = require('gulp-html-beautify');
 
 var options = {
     js: {
@@ -18,16 +15,28 @@ var options = {
     css: {
         src: 'src/tower-file-input.scss',
         dest: 'dist'
+    },
+    html: {
+        files: 'demo-templates/*.html',
+        watchFiles: 'demo-templates/**/*.html',
+        dest: 'demo'
     }
 };
 
-gulp.task('process-sass', function () {
+gulp.task('build-css', function () {
     return gulp.src(options.css.src)
         .pipe(sass())
         .pipe(gulp.dest(options.css.dest))
         .pipe(rename({ suffix: '.min' }))
         .pipe(cleanCss())
         .pipe(gulp.dest(options.css.dest));
+});
+
+gulp.task('build-html', function () {
+    return gulp.src(options.html.files)
+        .pipe(fileInclude())
+        .pipe(htmlBeautify())
+        .pipe(gulp.dest(options.html.dest));
 });
 
 gulp.task('process-js', function () {
@@ -38,8 +47,12 @@ gulp.task('process-js', function () {
         .pipe(gulp.dest(options.js.dest));
 });
 
-gulp.task('sass-watch', function () {
-    return gulp.watch(options.css.src, gulp.parallel('process-sass'));
+gulp.task('watch-sass', function () {
+    return gulp.watch(options.css.src, gulp.parallel('build-css'));
 });
 
-gulp.task('default', gulp.parallel('process-sass', 'process-js'));
+gulp.task('watch-html', function () {
+    return gulp.watch(options.html.watchFiles, gulp.parallel(['build-html']));
+});
+
+gulp.task('default', gulp.parallel('build-css', 'process-js', 'build-html'));

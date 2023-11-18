@@ -1,0 +1,1 @@
+new twrFileInput(document.getElementById('demoInput1'));

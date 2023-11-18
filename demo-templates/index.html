@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    @@include('./partials/_head.html', {
+    "title": "Tower File Input"
+    })
+</head>
+<body>
+    @@include('./partials/_nav.html')
+
+    <main class="container">
+        <h3>Tower File Input</h3>
+
+        <p>
+            This is a simple JavaScript plugin that works as a UI upgrade to the default HTML file input.
+        </p>
+
+        <hr />
+
+        @@include('./index/_demo.html')
+
+
+        <p>
+            <a href="#" class="twr-toggle" data-target="#demo-index-code">Show/Hide Code</a>
+        </p>
+
+        <div id="demo-index-code" class="hidden">
+            <pre><code class="language-html" data-sample-url="../demo-templates/index/_demo.html"></code></pre>
+            <pre><code class="language-javascript" data-sample-url="scripts/mainDemoInput.js"></code></pre>
+        </div>
+
+        <hr />
+        <h5>Setup</h5>
+
+        <p>The most basic setup will look like this:</p>
+
+        <pre><code class="language-html" data-sample-url="../samples/basicSetupHtml.html"></code></pre>
+        <pre><code class="language-javascript" data-sample-url="../samples/basicSetupJs.js"></code></pre>
+
+        <p>
+            The input and the label must be in an element with the class <code>twr-file</code>.
+            The <code>id</code> attribute of the input and the <code>for</code> attribute of the label must match or clicking on the label will not trigger the input.
+        </p>
+
+        <p>
+            The class <code>twr-file-button</code> can be used for basic styling on the label or buttons.
+            Remove this class if you are using a different style for the buttons.
+        </p>
+
+        <p>
+            You can add a button to clear all of the selected files by adding a button with the class <code>twr-file-clear</code>
+            inside the main element:
+        </p>
+
+        <pre><code class="language-html" data-sample-url="../samples/basicClearButton.html"></code></pre>
+
+        <p>
+            <a href="examples.html">More Examples</a>
+        </p>
+
+        <hr />
+        @@include('./index/_optionsList.html')
+    </main>
+
+    @@include('./partials/_footer.html')
+    @@include('./partials/_scripts.html')
+    <script src="scripts/mainDemoInput.js"></script>
+</body>
+</html>

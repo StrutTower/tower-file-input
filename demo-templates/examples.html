@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    @@include('./partials/_head.html', {
+        "title": "Tower File Input - Examples"
+    })
+</head>
+<body>
+    @@include('./partials/_nav.html')
+
+    <main class="container">
+        <h3>Examples</h3>
+        <hr />
+
+        <div>
+            <h5>Default Styling Single File</h5>
+            <p>
+                Basic setup using the class <code>twr-file-button</code>
+                on the label for the default styling included in the plugin.
+            </p>
+
+            @@include('./examples/_default.html')
+
+            <div class="text-end">
+                <a href="#" class="twr-toggle" data-target="#default-example-code">Show/Hide Code</a>
+            </div>
+
+            <div id="default-example-code" class="hidden">
+                <pre><code class="language-html" data-sample-url="../demo-templates/examples/_default.html"></code></pre>
+                <pre><code class="language-javascript" data-sample-url="scripts/examplesDefault.js"></code></pre>
+            </div>
+
+            <hr />
+        </div>
+
+        <div>
+            <h5>With Clear Button</h5>
+            <p>Add a button with the <code>twr-file-clear</code> class. This will allow deselecting all of the selected files.</p>
+
+            @@include('./examples/_clearButton.html')
+
+            <div class="text-end">
+                <a href="#" class="twr-toggle" data-target="#clear-button-example-code">Show/Hide Code</a>
+            </div>
+
+            <div id="clear-button-example-code" class="hidden">
+                <pre><code class="language-html" data-sample-url="../demo-templates/examples/_clearButton.html"></code></pre>
+                <pre><code class="language-javascript" data-sample-url="scripts/examplesClearButton.js"></code></pre>
+            </div>
+
+            <hr />
+        </div>
+
+        <div>
+            <h5>Default Styling Single File With a Font Icon</h5>
+            <p>
+                Adds a font icon before the text when any files are selected.
+                The icon when no files are selected has to be in the HTML of the label
+                when the plugin is initialized.
+            </p>
+
+            @@include('./examples/_fontIcon.html')
+
+            <div class="text-end">
+                <a href="#" class="twr-toggle" data-target="#font-icon-example-code">Show/Hide Code</a>
+            </div>
+
+            <div id="font-icon-example-code" class="hidden">
+                <pre><code class="language-html" data-sample-url="../demo-templates/examples/_fontIcon.html"></code></pre>
+                <pre><code class="language-javascript" data-sample-url="scripts/examplesFontIcon.js"></code></pre>
+            </div>
+            <hr />
+        </div>
+
+        <div>
+            <h5>Default Styling Multiple Files</h5>
+            <p>Add the <code>multiple</code> attribute to the file input to allow selecting multiple files.</p>
+
+            @@include('./examples/_multipleFiles.html')
+
+            <div class="text-end">
+                <a href="#" class="twr-toggle" data-target="#multiple-files-example-code">Show/Hide Code</a>
+            </div>
+
+            <div id="multiple-files-example-code" class="hidden">
+                <pre><code class="language-html" data-sample-url="../demo-templates/examples/_multipleFiles.html"></code></pre>
+                <pre><code class="language-javascript" data-sample-url="scripts/examplesMultipleFiles.js"></code></pre>
+            </div>
+
+            <hr />
+        </div>
+
+        <div>
+            <h5>Using Bootstrap Styles</h5>
+            <p>
+                Replace the <code>twr-file-button</code> class with something like Bootstraps button classes
+            </p>
+
+            @@include('./examples/_bootstrapStyles.html')
+
+            <div class="text-end">
+                <a href="#" class="twr-toggle" data-target="#bootstrap-styles-example-code">Show/Hide Code</a>
+            </div>
+
+            <div id="bootstrap-styles-example-code" class="hidden">
+                <pre><code class="language-html" data-sample-url="../demo-templates/examples/_bootstrapStyles.html"></code></pre>
+                <pre><code class="language-javascript" data-sample-url="scripts/examplesBootstrapStyles.js"></code></pre>
+            </div>
+        </div>
+    </main>
+
+    @@include('./partials/_footer.html')
+    @@include('./partials/_scripts.html')
+    <script src="scripts/examplesDefault.js"></script>
+    <script src="scripts/examplesFontIcon.js"></script>
+    <script src="scripts/examplesMultipleFiles.js"></script>
+    <script src="scripts/examplesClearButton.js"></script>
+    <script src="scripts/examplesBootstrapStyles.js"></script>
+</body>
+</html>

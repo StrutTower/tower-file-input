@@ -1,152 +1,166 @@
-(function ($) {
-
-    $.fn.fileInput = function (options) {
-
-        var settings = $.extend({
-            fileList: true,
+(function () {
+    this.twrFileInput = function (input, options) {
+        let defaults = {
+            showFileList: true,
+            showImgPreview: true,
             iconClass: null,
-            imgPreview: true,
-            imgPreviewClass: '',
-            imgPreviewSelector: null
-        }, options);
+            imgPreviewClass: ''
+        };
 
-        function inputValueChanged(e) {
-            var input = $(this);
+        this.element = input;
+        this.settings = (options && typeof options === 'object') ? extendDefaults(defaults, options) : defaults;
 
-            var container = input.closest('.tower-file');
-            var label = container.find('label');
-            var clear = container.find('.tower-file-clear');
-            var fileList = container.find('.tower-file-list').empty().hide();
-            var imgContainer = container.find('.tower-input-preview-container');
-            var img = container.find('img');
-            var details = container.find('.tower-file-details');
-            if (!details.length) {
-                container.append('<div class="tower-file-details"></div>');
-                details = container.find('.tower-file-details');
+        this.init = function () {
+            this.element.addEventListener('change', inputChanged);
+            this.element.settings = this.settings;
+
+            let container = this.element.closest('.twr-file');
+            createElements(container, this.settings.imgPreviewClass);
+
+            let label = container.querySelector('label');
+            label.dataset.defaultHtml = label.innerHTML;
+
+            let clearButton = container.querySelector('.twr-file-clear');
+            if (clearButton !== null) {
+                clearButton.disabled = true;
+                clearButton.addEventListener('click', clearButtonClicked);
             }
+        }
 
-            var files = input[0].files;
+        function inputChanged(e) {
+            let settings = e.currentTarget.settings;
+            let container = this.closest('.twr-file');
+            let label = container.querySelector('label');
+            let clearButton = container.querySelector('.twr-file-clear');
+            var details = container.querySelector('.twr-file-details');
+            var fileList = container.querySelector('.twr-file-list');
+            var img = container.querySelector('img');
+            var imgContainer = container.querySelector('.twr-img-preview-container');
 
-            var iconHtml = '';
+            var files = this.files;
+
+            let iconHtml = '';
             if (settings.iconClass !== null && settings.iconClass.length > 0) {
-                iconHtml = '<span class="mdi mdi-upload"></span>';
+                iconHtml = '<span class="' + settings.iconClass + '"></span>';
             }
 
             if (files.length === 1) {
-                // Single File Selected
+                // One file selected
                 var file = files[0];
-                label.html(iconHtml + file.name);
+                label.innerHTML = iconHtml + file.name;
+                fileList.classList.add('hidden');
 
-                if (file.type.match('image.*') && settings.imgPreview && (settings.imgPreviewSelector === null || settings.imgPreviewSelector.length < 1)) {
-                    if (!img.length) {
-                        details.append('<div class="tower-input-preview-container"><div class="tower-input-preview-wrapper"><img alt="" /></div></div>');
-                        img = container.find('img');
-                        if (settings.imgPreviewClass !== undefined && settings.imgPreviewClass.length > 0) {
-                            img.addClass(settings.imgPreviewClass)
-                        }
-                    }
+                if (clearButton !== null) clearButton.disabled = false;
 
-                    details.show();
-                    imgContainer.show();
+                if (file.type.match('image.*') && settings.showImgPreview) {
+                    details.classList.remove('hidden');
+                    imgContainer.classList.remove('hidden');
                     showImgPreview(file, img);
-                } else if (file.type.match('image.*') && settings.imgPreview && settings.imgPreviewSelector !== null && settings.imgPreviewSelector.length > 0) {
-                    img = $(settings.imgPreviewSelector);
-                    if (img.length > 0 && img.is('img')) {
-                        details.hide();
-                        imgContainer.show();
-                        showImgPreview(file, img);
-                    } else {
-                        throw 'The selected element must be a img';
-                    }
                 } else {
-                    details.hide();
-                    img.attr('src', '').hide();
+                    details.classList.add('hidden');
+                    img.src = '';
                 }
-                clear.attr('disabled', null);
-
             } else if (files.length > 1) {
-                // Multiple Files Selected
-                img.attr('src', '').hide();
+                // Multiple files selected
+                img.src = '';
+                label.innerHTML = iconHtml + files.length + ' Files Selected';
+                if (clearButton !== null) clearButton.disabled = false;
 
-                if (settings.fileList) {
-                    if (!fileList.length) {
-                        details.append('<ul class="tower-file-list"></ul>');
-                        fileList = container.find('.tower-file-list');
+                if (settings.showFileList) {
+                    fileList.innerHTML = '';
+
+                    for (let i = 0; i < files.length; i++) {
+                        let li = document.createElement('li');
+                        li.innerText = files[i].name;
+                        fileList.appendChild(li);
                     }
 
-                    for (var i = 0; i < files.length; i++) {
-                        fileList.append('<li>' + files[i].name + '</li>');
-                    }
-                    details.show();
-                    fileList.show();
-                    imgContainer.hide();
+                    details.classList.remove('hidden');
+                    fileList.classList.remove('hidden');
+                    imgContainer.classList.add('hidden');
                 } else {
-                    fileList.hide();
-                    imgContainer.hide();
+                    details.classList.add('hidden');
+                    fileList.classList.add('hidden');
+                    imgContainer.classList.add('hidden');
                 }
-                label.html(iconHtml + files.length + ' Files Selected');
-                clear.attr('disabled', null);
-
             } else {
-                // No Files Selected
-                details.hide();
-                img.attr('src', '').hide();
-                label.html(label.data('default-text'));
-                clear.attr('disabled', '');
+                // No files selected
+                img.src = '';
+                details.classList.add('hidden');
+                label.innerHTML = label.dataset.defaultHtml;
+                clearButton.disabled = true
             }
         }
 
-        // Read the file data and insert the data URL into the src
         function showImgPreview(file, img) {
-
             var reader = new FileReader();
 
             reader.onload = function (e) {
-                img[0].onload = function () {
-                    if (this.height > this.width) {
-                        img.addClass('tower-input-preview-portrait');
-                    } else {
-                        img.removeClass('tower-input-preview-portrait');
-                    }
-                };
-                img.attr('src', reader.result).show();
-            };
+                img.src = reader.result;
+            }
             reader.readAsDataURL(file);
         }
 
-        function clearInputAndDetails() {
-            var container = $(this).closest('.tower-file');
+        function clearButtonClicked() {
+            let container = this.closest('.twr-file');
+            let label = container.querySelector('label');
+            let input = container.querySelector('input[type="file"]');
+            var details = container.querySelector('.twr-file-details');
+            let clearButton = container.querySelector('.twr-file-clear');
+            var imgContainer = container.querySelector('.twr-img-preview-container');
 
-            container.find('input[type="file"]').val('');
+            input.value = '';
+            label.innerHTML = label.dataset.defaultHtml;
 
-            var label = container.find('label');
-            label.html(label.data('default-text'));
+            imgContainer.classList.add('hidden');
+            details.classList.add('hidden');
+            clearButton.disabled = true
+        }
 
-            container.find('.tower-file-clear').attr('disabled', '');
+        function createElements(container, imgPreviewClass) {
+            var details = container.querySelector('.twr-file-details');
+            if (details === null) {
+                details = document.createElement('div');
+                details.classList.add('twr-file-details');
+                details.classList.add('hidden');
+                container.appendChild(details);
+            }
 
-            var details = container.find('.tower-file-details');
-            details.hide();
+            var img = container.querySelector('img');
+            var imgContainer = container.querySelector('.twr-img-preview-container');
 
-            if (settings.imgPreviewSelector !== null && settings.imgPreviewSelector.length > 0) {
-                $(settings.imgPreviewSelector).attr('src', '');
+            if (img == null) {
+                img = document.createElement('img');
+
+                imgContainer = document.createElement('div');
+                imgContainer.classList.add('twr-img-preview-container');
+                imgContainer.classList.add('hidden');
+
+                if (imgPreviewClass !== null && imgPreviewClass.length > 0) {
+                    img.classList.add(imgPreviewClass);
+                }
+
+                imgContainer.appendChild(img);
+                details.appendChild(imgContainer);
+            }
+
+            var fileList = container.querySelector('.twr-file-list');
+            if (fileList === null) {
+                fileList = document.createElement('ul');
+                fileList.classList.add('twr-file-list');
+                details.appendChild(fileList);
             }
         }
 
-        this.filter('input[type="file"]').each(function () {
-            var container = $(this).closest('.tower-file');
-            var label = container.find('label');
-            if (label.length) {
-                label.attr('data-default-text', label.html().trim());
-            }
+        function extendDefaults(defaults, properties) {
+            Object.keys(properties).forEach(property => {
+                if (properties.hasOwnProperty(property)) {
+                    defaults[property] = properties[property];
+                }
+            });
+            return defaults;
+        }
 
-            var clear = container.find('.tower-file-clear');
-            if (clear.length) {
-                clear.attr('disabled', '');
-                clear.on('click', clearInputAndDetails);
-            }
-
-            $(this).on('change', inputValueChanged);
-        });
-    };
-
-}(jQuery));
+        this.init();
+    }
+}());
