@@ -3,8 +3,7 @@
         let defaults = {
             showFileList: true,
             showImgPreview: true,
-            iconClass: null,
-            imgPreviewClass: ''
+            iconClass: null
         };
 
         this.element = input;
@@ -15,7 +14,7 @@
             this.element.settings = this.settings;
 
             let container = this.element.closest('.twr-file');
-            createElements(container, this.settings.imgPreviewClass);
+            createElements(container);
 
             let label = container.querySelector('label');
             label.dataset.defaultHtml = label.innerHTML;
@@ -117,7 +116,7 @@
             clearButton.disabled = true
         }
 
-        function createElements(container, imgPreviewClass) {
+        function createElements(container) {
             var details = container.querySelector('.twr-file-details');
             if (details === null) {
                 details = document.createElement('div');
@@ -131,14 +130,11 @@
 
             if (img == null) {
                 img = document.createElement('img');
+                img.classList.add('twr-preview-img')
 
                 imgContainer = document.createElement('div');
                 imgContainer.classList.add('twr-img-preview-container');
                 imgContainer.classList.add('hidden');
-
-                if (imgPreviewClass !== null && imgPreviewClass.length > 0) {
-                    img.classList.add(imgPreviewClass);
-                }
 
                 imgContainer.appendChild(img);
                 details.appendChild(imgContainer);
