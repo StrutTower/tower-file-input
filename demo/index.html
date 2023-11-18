@@ -100,8 +100,24 @@
         </p>
 
         <div id="demo-index-code" class="hidden">
-            <pre><code class="language-html" data-sample-url="~/../../demo-templates/index/_demo.html"></code></pre>
-            <pre><code class="language-javascript" data-sample-url="scripts/mainDemoInput.js"></code></pre>
+            <pre><code class="language-html">&lt;div class=&quot;mb-3&quot;&gt;
+    &lt;h5&gt;Live Demo&lt;/h5&gt;
+    &lt;p&gt;
+        Try picking a single non-image file, multiple files, and a single image file.
+    &lt;/p&gt;
+    &lt;div class=&quot;twr-file&quot;&gt;
+        &lt;input type=&quot;file&quot; id=&quot;mainDemoInput&quot; multiple /&gt;
+
+        &lt;label for=&quot;mainDemoInput&quot; class=&quot;btn btn-primary&quot;&gt;
+            &lt;span class=&quot;mdi mdi-upload&quot;&gt;&lt;/span&gt;Select Files
+        &lt;/label&gt;
+        &lt;button type=&quot;button&quot; class=&quot;btn btn-secondary twr-file-clear&quot; title=&quot;Clear Selected File(s)&quot;&gt;
+            &lt;span class=&quot;mdi mdi-cancel pr-1&quot;&gt;&lt;/span&gt;Clear Selected File(s)
+        &lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            <pre><code class="language-javascript">let input = document.getElementById('mainDemoInput');
+new twrFileInput(input);</code></pre>
         </div>
 
         <hr />
@@ -109,8 +125,14 @@
 
         <p>The most basic setup will look like this:</p>
 
-        <pre><code class="language-html" data-sample-url="../samples/basicSetupHtml.html"></code></pre>
-        <pre><code class="language-javascript" data-sample-url="../samples/basicSetupJs.js"></code></pre>
+        <pre><code class="language-html">&lt;div class=&quot;twr-file&quot;&gt;
+    &lt;input type=&quot;file&quot; id=&quot;file1&quot; /&gt;
+    &lt;label for=&quot;file1&quot;&gt;
+        Select a File
+    &lt;/label&gt;
+&lt;/div&gt;</code></pre>
+        <pre><code class="language-javascript">let input = document.getElementByID('file1');
+new twrFileInput(input);</code></pre>
 
         <p>
             The input and the label must be in an element with the class <code>twr-file</code>.
@@ -127,7 +149,9 @@
             inside the main element:
         </p>
 
-        <pre><code class="language-html" data-sample-url="../samples/basicClearButton.html"></code></pre>
+        <pre><code class="language-html">&lt;button type=&quot;button&quot; class=&quot;twr-file-clear twr-file-button&quot;&gt;
+    Clear
+&lt;/button&gt;</code></pre>
 
         <p>
             <a href="examples.html">More Examples</a>
@@ -175,7 +199,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js" data-manual></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markup.min.js"></script>
 

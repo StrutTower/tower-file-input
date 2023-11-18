@@ -5,7 +5,8 @@ var gulp = require('gulp'),
     terser = require('gulp-terser'),
     rename = require('gulp-rename'),
     fileInclude = require('gulp-file-include'),
-    htmlBeautify = require('gulp-html-beautify');
+    htmlBeautify = require('gulp-html-beautify')
+    html = require('html-escaper');
 
 var options = {
     js: {
@@ -34,7 +35,11 @@ gulp.task('build-css', function () {
 
 gulp.task('build-html', function () {
     return gulp.src(options.html.files)
-        .pipe(fileInclude())
+        .pipe(fileInclude({
+            filters: {
+                html: html.escape
+            }
+        }))
         .pipe(htmlBeautify())
         .pipe(gulp.dest(options.html.dest));
 });
