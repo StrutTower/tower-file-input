@@ -3,7 +3,8 @@
         let defaults = {
             showFileList: true,
             showImgPreview: true,
-            iconClass: null
+            iconClass: null,
+            uploadIconHtml: null
         };
 
         this.element = input;
@@ -39,9 +40,12 @@
             var files = this.files;
 
             let iconHtml = '';
-            if (settings.iconClass !== null && settings.iconClass.length > 0) {
+            if (settings.uploadIconHtml !== null && settings.uploadIconHtml.length > 0) {
+                iconHtml = settings.uploadIconHtml;
+            } else if (settings.iconClass !== null && settings.iconClass.length > 0) {
                 iconHtml = '<span class="' + settings.iconClass + '"></span>';
             }
+
 
             if (files.length === 1) {
                 // One file selected
