@@ -91,7 +91,7 @@
                 img.src = '';
                 details.classList.add('hidden');
                 label.innerHTML = label.dataset.defaultHtml;
-                clearButton.disabled = true
+                if (clearButton !== null) clearButton.disabled = true
             }
         }
 
@@ -117,7 +117,7 @@
 
             imgContainer.classList.add('hidden');
             details.classList.add('hidden');
-            clearButton.disabled = true
+            if (clearButton !== null) clearButton.disabled = true
         }
 
         function createElements(container) {
