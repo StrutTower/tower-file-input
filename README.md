@@ -1,5 +1,3 @@
 ﻿## Tower-File-Input
 
-This is a simple JavaScript plugin that works as a UI upgrade to the default HTML file input.
-
-[Live Demo](https://struttower.github.io/tower-file-input/demo/index.html)
+This project has moved to https://codeberg.org/StrutTower/tower-file-input
